@@ -1,8 +1,8 @@
 [package]
 name = "fortinet-connect"
-version = "0.0.0"
-description = "A Tauri App"
-authors = ["you"]
+version = "0.1.0"
+description = "Automatically login to fortinet for wifi access, auto refreshes it so you don't have to do it manually"
+authors = ["Rushikesh Pawar"]
 edition = "2021"
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
