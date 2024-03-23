@@ -1,6 +1,8 @@
 name: Release
 on:
   push:
+    branches:
+      - 'main'
     tags:
       - 'v*'
   workflow_dispatch:
@@ -43,7 +45,7 @@ jobs:
       - name: Install bun
         uses: oven-sh/setup-bun@v1
         with:
-          bun-version: 1.0.28
+          bun-version: "latest"
           cache: "bun"
 
       
