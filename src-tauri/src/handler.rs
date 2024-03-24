@@ -4,8 +4,6 @@ use tauri::Manager;
 
 use crate::{worker::worker, Credentials};
 
-
-
 #[tauri::command]
 pub async fn store_credentials(
     app_handle: tauri::AppHandle,
@@ -16,8 +14,16 @@ pub async fn store_credentials(
     println!("{}", s);
 
     // write to file
-    let binding = app_handle.path_resolver().app_data_dir().unwrap();
-    let app_data_dir = binding.to_str().unwrap();
+    let app_data_path = app_handle.path_resolver().app_data_dir().unwrap();
+    // print if path does not exist
+    let exists = app_data_path.exists();
+    if !exists {
+        println!("Path does not exist: {:?}", app_data_path);
+        // create it
+        std::fs::create_dir_all(&app_data_path).unwrap();
+    }
+    
+    let app_data_dir = app_data_path.to_str().unwrap();
     // println!("App data dir: {:?}", app_data_dir);
     let file_path = format!("{}/creds.txt", app_data_dir);
     let mut file = File::create(file_path).unwrap();

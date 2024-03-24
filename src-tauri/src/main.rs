@@ -1,6 +1,7 @@
 // Prevents additional console window on Windows in release, DO NOT REMOVE!!
 #![cfg_attr(not(debug_assertions), windows_subsystem = "windows")]
 
+mod creds_window;
 mod fortinet;
 mod handler;
 mod setup;
@@ -29,9 +30,14 @@ fn main() {
         .setup(|app| {
             let state: tauri::State<Credentials> = app.state();
 
-            let path = app.handle().path_resolver().app_data_dir().unwrap();
-            println!("Path: {:?}", path);
-            let file_path = format!("{}/creds.txt", path.to_str().unwrap());
+            let app_data_path_buf = app.path_resolver().app_data_dir().unwrap();
+
+            println!("Path: {:?}", app_data_path_buf);
+            println!("Logging path: {:?}", app.path_resolver().app_log_dir().unwrap());
+            // std::fs::create_dir_all(&app_data_path_buf).unwrap();
+            let app_data_path = app_data_path_buf.to_str().unwrap();
+
+            let file_path = format!("{}/creds.txt", app_data_path);
             let file = File::open(file_path);
             match file {
                 Ok(mut file) => {
@@ -53,6 +59,7 @@ fn main() {
                 }
                 Err(e) => {
                     println!("Error: {:?}", e);
+                    creds_window::open_window(&app.app_handle());
                 }
             }
 
@@ -65,19 +72,7 @@ fn main() {
                     std::process::exit(0);
                 }
                 "add" => {
-                    let creds_window = tauri::WindowBuilder::new(
-                        app_handle,
-                        "addcreds", /* the unique window label */
-                        tauri::WindowUrl::App("index.html".into()),
-                    )
-                    .title("fortinet-connect")
-                    .center()
-                    .build()
-                    .ok();
-
-                    if let Some(creds_window) = creds_window {
-                        creds_window.show().ok();
-                    }
+                    creds_window::open_window(app_handle);
                 }
 
                 _ => {}
