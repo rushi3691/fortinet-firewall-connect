@@ -71,7 +71,7 @@ fn main() {
                 "quit" => {
                     std::process::exit(0);
                 }
-                "add" => {
+                "add_creds" => {
                     creds_window::open_window(app_handle);
                 }
 

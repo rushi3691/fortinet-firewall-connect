@@ -18,7 +18,7 @@ pub async fn worker(
             Err(e) => {
                 println!("Error: {}", e);
                 if tries == 1 {
-                    break Ok(());
+                    break Err(e);
                 }
                 tries -= 1;
                 sleep(Duration::from_secs(1)).await;

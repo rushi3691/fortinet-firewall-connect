@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <!-- <link rel="stylesheet" href="styles.css" /> -->
+    <link rel="stylesheet" href="styles.css" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Tauri App</title>
     <script type="module" src="/main.js" defer></script>
@@ -13,10 +13,10 @@
       <h1>Welcome to Fortinet-connect!</h1>
       <form class="row" id="creds-form">
         <label for="creds-username">Enter your username</label>
-        <input id="creds-username" placeholder="Enter username..." />
+        <input id="creds-username" placeholder="username..."  type="text" required/>
         <label for="creds-password">Enter your password</label>
-        <input id="creds-password" placeholder="Enter message..." />
-        <button type="submit">Greet</button>
+        <input id="creds-password" placeholder="password..." type="password" required/>
+        <button type="submit">Save Credentials and Login</button>
       </form>
 
       <p id="creds-msg"></p>

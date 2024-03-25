@@ -43,5 +43,6 @@ pub async fn store_credentials(
     let j = tauri::async_runtime::spawn(worker(username.to_string(), password.to_string()));
     state.worker.lock().await.replace(j);
 
-    Ok(s)
+    let response = format!("Stored credentials for user: {}", username);
+    Ok(response)
 }

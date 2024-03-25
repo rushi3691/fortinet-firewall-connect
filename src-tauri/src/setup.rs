@@ -38,7 +38,7 @@ use tauri::{CustomMenuItem, SystemTray, SystemTrayMenu};
 // generate tray
 pub fn generate_tray() -> SystemTray {
     let quit = CustomMenuItem::new("quit".to_string(), "Quit");
-    let add = CustomMenuItem::new("add".to_string(), "Add");
+    let add = CustomMenuItem::new("add_creds".to_string(), "Add Credentials");
     let tray_menu = SystemTrayMenu::new().add_item(quit).add_item(add);
     SystemTray::new().with_menu(tray_menu)
 }
