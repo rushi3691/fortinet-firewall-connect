@@ -22,7 +22,10 @@
       "active": true,
       "targets": "all",
       "identifier": "com.fortinet-connect-by-rushikesh.dev",
-      "icon": [],
+      "icon": [
+        "icons/icon.icns",
+        "icons/icon.ico"
+      ],
       "publisher": "rushikesh"
     }
   }
