@@ -60,11 +60,13 @@ pub async fn login(
         .ok_or("Keep alive url not found")?
         .inner_html()
         .split("\"")
-        .collect::<Vec<&str>>()[1]
+        .nth(1)
+        .ok_or("Keep alive url not found")?
         .to_string();
     println!("{}", keep_alive_url);
 
-    let session_id = keep_alive_url.split('?').collect::<Vec<&str>>()[1];
+    // let session_id = keep_alive_url.split('?').collect::<Vec<&str>>()[1];
+    let session_id = keep_alive_url.split("?").nth(1).ok_or("Session id not found")?;
     println!("{}", session_id);
 
     Ok(())
