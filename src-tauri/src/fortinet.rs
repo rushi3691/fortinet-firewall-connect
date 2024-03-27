@@ -67,7 +67,7 @@ pub async fn login(
 
     // let session_id = keep_alive_url.split('?').collect::<Vec<&str>>()[1];
     let session_id = keep_alive_url.split("?").nth(1).ok_or("Session id not found")?;
-    println!("{}", session_id);
+    println!("Logged in with sid: {}", session_id);
 
     Ok(())
 }

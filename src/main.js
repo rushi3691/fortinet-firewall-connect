@@ -6,7 +6,11 @@ let credsMsgEl;
 
 async function store_credentials() {
   console.log("creds", credsUsernameEl.value, credsPasswordEl.value)
-  credsMsgEl.textContent = await invoke("store_credentials", { username: credsUsernameEl.value, password: credsPasswordEl.value });
+  try{
+    credsMsgEl.textContent = await invoke("store_credentials", { username: credsUsernameEl.value, password: credsPasswordEl.value });
+  }catch(e){
+    credsMsgEl.textContent = e;
+  }
 }
 
 window.addEventListener("DOMContentLoaded", () => {

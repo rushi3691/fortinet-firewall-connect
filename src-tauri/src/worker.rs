@@ -14,7 +14,6 @@ pub async fn worker(
         let res = fortinet::login(&username, &password).await;
 
         match res {
-            Ok(_) => println!("Logged in!"),
             Err(e) => {
                 println!("Error: {}", e);
                 if tries == 1 {
@@ -24,6 +23,7 @@ pub async fn worker(
                 sleep(Duration::from_secs(1)).await;
                 continue;
             }
+            Ok(_) => {}
         }
 
         sleep(Duration::from_secs(SLEEP_TIME)).await;

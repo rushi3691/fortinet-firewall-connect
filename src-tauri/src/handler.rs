@@ -2,16 +2,19 @@ use std::{fs::File, io::Write};
 
 use tauri::Manager;
 
-use crate::{worker::worker, Credentials};
+use crate::{fortinet, worker::worker, Credentials};
 
 #[tauri::command]
 pub async fn store_credentials(
     app_handle: tauri::AppHandle,
     username: String,
     password: String,
-) -> Result<String, ()> {
+) -> Result<String, String> {
     let s = format!("{}\n{}", username, password);
     println!("{}", s);
+    
+    // check credentials valid or not, by logging in
+    fortinet::login(&username, &password).await.or(Err("Login failed"))?;
 
     // write to file
     let app_data_path = app_handle.path_resolver().app_data_dir().unwrap();
