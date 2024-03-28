@@ -18,7 +18,7 @@ jobs:
             args: '--target universal-apple-darwin'
           - platform: 'macos-latest'
             args: '--target x86_64-apple-darwin'
-          - platform: 'macos-latest'
+          - platform: 'macos-14'
             args: '--target aarch64-apple-darwin'
           # - platform: 'macos-latest'
           # #  args: '--target aarch64-apple-darwin'
@@ -44,8 +44,8 @@ jobs:
 
       - name: Rust setup
         uses: dtolnay/rust-toolchain@stable
-        with:
-          targets: aarch64-apple-darwin
+        # with:
+        #   targets: aarch64-apple-darwin
 
       - name: Rust cache
         uses: swatinem/rust-cache@v2
