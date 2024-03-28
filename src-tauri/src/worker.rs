@@ -2,7 +2,7 @@ use tokio::time::{sleep, Duration};
 
 use crate::fortinet;
 
-const SLEEP_TIME: u64 = 10; // 10750
+const SLEEP_TIME: u64 = 10700; // 10800 seconds is actual session timeout
 
 pub async fn worker(
     username: String,
