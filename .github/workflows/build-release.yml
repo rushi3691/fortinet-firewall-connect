@@ -2,7 +2,7 @@ name: Release
 on:
   push:
     branches:
-      - 'main'
+      - 'release'
 
 
 jobs:
@@ -18,7 +18,7 @@ jobs:
             args: '--target universal-apple-darwin'
           - platform: 'macos-latest'
             args: '--target x86_64-apple-darwin'
-          - platform: 'macos-14'
+          - platform: 'macos-latest'
             args: '--target aarch64-apple-darwin'
           # - platform: 'macos-latest'
           # #  args: '--target aarch64-apple-darwin'

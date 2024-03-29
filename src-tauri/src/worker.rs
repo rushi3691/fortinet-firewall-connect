@@ -2,7 +2,8 @@ use tokio::time::{sleep, Duration};
 
 use crate::fortinet;
 
-const SLEEP_TIME: u64 = 10700; // 10800 seconds is actual session timeout
+// 10800 seconds is actual session timeout
+const SLEEP_TIME_SECONDS: u64 = 10*60; // refresh every 10 minutes    
 
 pub async fn worker(
     username: String,
@@ -26,7 +27,7 @@ pub async fn worker(
             Ok(_) => {}
         }
 
-        sleep(Duration::from_secs(SLEEP_TIME)).await;
+        sleep(Duration::from_secs(SLEEP_TIME_SECONDS)).await;
     }
 }
 
