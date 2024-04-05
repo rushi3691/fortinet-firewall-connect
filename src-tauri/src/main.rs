@@ -23,7 +23,7 @@ struct Credentials {
 fn main() {
     let tray = generate_tray();
 
-    let app = tauri::Builder::default()
+    let mut _app = tauri::Builder::default()
         .manage(Credentials {
             worker: Mutex::new(None),
         })
@@ -84,9 +84,9 @@ fn main() {
         .expect("error while running tauri application");
 
         #[cfg(target_os = "macos")]
-        app.set_activation_policy(tauri::ActivationPolicy::Accessory);
+        _app.set_activation_policy(tauri::ActivationPolicy::Accessory);
 
-        app.run(|_app_handle, event| match event {
+        _app.run(|_app_handle, event| match event {
             tauri::RunEvent::ExitRequested { api, .. } => {
                 api.prevent_exit();
             }
