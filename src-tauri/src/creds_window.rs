@@ -8,6 +8,7 @@ pub fn open_window(app_handle: &AppHandle) {
     )
     .title("fortinet-connect")
     .center()
+    .content_protected(true)
     .build()
     .ok();
 

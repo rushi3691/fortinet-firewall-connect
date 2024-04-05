@@ -23,7 +23,7 @@ struct Credentials {
 fn main() {
     let tray = generate_tray();
 
-    tauri::Builder::default()
+    let app = tauri::Builder::default()
         .manage(Credentials {
             worker: Mutex::new(None),
         })
@@ -81,8 +81,12 @@ fn main() {
         })
         .invoke_handler(tauri::generate_handler![store_credentials])
         .build(tauri::generate_context!())
-        .expect("error while running tauri application")
-        .run(|_app_handle, event| match event {
+        .expect("error while running tauri application");
+
+        #[cfg(target_os = "macos")]
+        app.set_activation_policy(tauri::ActivationPolicy::Accessory);
+
+        app.run(|_app_handle, event| match event {
             tauri::RunEvent::ExitRequested { api, .. } => {
                 api.prevent_exit();
             }
