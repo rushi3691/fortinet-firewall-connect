@@ -8,13 +8,12 @@ mod setup;
 mod system_tray;
 mod worker;
 
+use env_logger::Env;
 use std::error::Error;
-use tokio::sync::Mutex;
-// use sys_info::{PowerStatus, SystemExt};
 use tauri_plugin_autostart::MacosLauncher;
+use tokio::sync::Mutex;
 
 use handler::store_credentials;
-// use setup::{generate_tray, setup_tray_with_autostart};
 
 struct Credentials {
     worker:
@@ -22,6 +21,8 @@ struct Credentials {
 }
 
 fn main() {
+    env_logger::Builder::from_env(Env::default().default_filter_or("info")).init();
+
     let tray = system_tray::generate_tray();
 
     let mut _app = tauri::Builder::default()

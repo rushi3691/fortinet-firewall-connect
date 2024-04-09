@@ -1,5 +1,6 @@
 use std::{fs::File, io::Read};
 
+use log::{error, info, warn};
 use tauri::{App, Manager as _};
 
 use crate::{creds_window, worker::worker, Credentials};
@@ -9,8 +10,8 @@ pub fn verify_creds_on_start(app: &mut App) {
 
     let app_data_path_buf = app.path_resolver().app_data_dir().unwrap();
 
-    println!("Path: {:?}", app_data_path_buf);
-    println!(
+    info!("Path: {:?}", app_data_path_buf);
+    info!(
         "Logging path: {:?}",
         app.path_resolver().app_log_dir().unwrap()
     );
@@ -32,11 +33,11 @@ pub fn verify_creds_on_start(app: &mut App) {
                     tauri::async_runtime::spawn(worker(username.to_string(), password.to_string()));
                 state.worker.blocking_lock().replace(j);
             } else {
-                println!("No creds found");
+                warn!("No creds found");
             }
         }
         Err(e) => {
-            println!("Error: {:?}", e);
+            error!("{:?}", e);
             creds_window::open_window(&app.app_handle());
         }
     }

@@ -1,3 +1,4 @@
+use log::info;
 use tauri::{App, AppHandle, CustomMenuItem, SystemTray, SystemTrayEvent, SystemTrayMenu};
 use tauri_plugin_autostart::ManagerExt as _;
 
@@ -27,10 +28,10 @@ pub fn handle_system_tray_events(app_handle: &AppHandle, event: SystemTrayEvent)
                     creds_window::open_window(app_handle);
                 }
                 "enable_auto_start" => {
-                    println!("enable_auto_start");
+                    info!("enable_auto_start");
                     let autostart_manager = app_handle.autolaunch();
                     let _ = autostart_manager.enable();
-                    println!(
+                    info!(
                         "registered for autostart? {:?}",
                         autostart_manager.is_enabled()
                     );
@@ -42,10 +43,10 @@ pub fn handle_system_tray_events(app_handle: &AppHandle, event: SystemTrayEvent)
                     disable_auto_start_item.set_enabled(true).unwrap();
                 }
                 "disable_auto_start" => {
-                    println!("disable_auto_start");
+                    info!("disable_auto_start");
                     let autostart_manager = app_handle.autolaunch();
                     let _ = autostart_manager.disable();
-                    println!(
+                    info!(
                         "registered for autostart? {:?}",
                         autostart_manager.is_enabled()
                     );

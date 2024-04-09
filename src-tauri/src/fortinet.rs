@@ -1,3 +1,4 @@
+use log::{debug, info};
 use reqwest::header::{HeaderMap, HeaderValue, CONNECTION, USER_AGENT};
 use scraper::{Html, Selector};
 
@@ -10,7 +11,7 @@ pub async fn extract_magic() -> Result<String, Box<dyn std::error::Error + Send 
     headers.insert(CONNECTION, HeaderValue::from_static("keep-alive"));
 
     let resp = client.get(FORTI_URL).headers(headers).send().await?;
-    println!("Status: {}", resp.status());
+    debug!("magic request status: {}", resp.status());
     let body = resp.text().await?;
     let document = Html::parse_document(&body);
     let selector = Selector::parse(r#"input[name="magic"]"#).or(Err("Selector not found"))?;
@@ -20,7 +21,7 @@ pub async fn extract_magic() -> Result<String, Box<dyn std::error::Error + Send 
         .attr("value")
         .ok_or("Magic not found")?
         .to_string();
-    println!("Magic: {:?}", magic);
+    debug!("Magic: {:?}", magic);
     Ok(magic)
 }
 
@@ -28,10 +29,9 @@ pub async fn login(
     username: &String,
     password: &String,
 ) -> Result<(), Box<dyn std::error::Error + Send + Sync>> {
-    println!("Logging in!");
+    info!("Logging in!");
 
     let magic = extract_magic().await?;
-    println!("magic {}", magic);
 
     let params = [
         ("4Tredir", FORTI_URL),
@@ -63,11 +63,14 @@ pub async fn login(
         .nth(1)
         .ok_or("Keep alive url not found")?
         .to_string();
-    println!("{}", keep_alive_url);
+    info!("{}", keep_alive_url);
 
     // let session_id = keep_alive_url.split('?').collect::<Vec<&str>>()[1];
-    let session_id = keep_alive_url.split("?").nth(1).ok_or("Session id not found")?;
-    println!("Logged in with sid: {}", session_id);
+    let session_id = keep_alive_url
+        .split("?")
+        .nth(1)
+        .ok_or("Session id not found")?;
+    info!("Logged in with sid: {}", session_id);
 
     Ok(())
 }
