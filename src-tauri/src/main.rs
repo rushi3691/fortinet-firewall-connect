@@ -33,6 +33,7 @@ fn main() {
             MacosLauncher::LaunchAgent,
             Some(vec!["--flag1", "--flag2"]),
         ))
+        .plugin(tauri_plugin_single_instance::init(|_app, _args, _cwd| {}))
         .system_tray(tray)
         .on_system_tray_event(system_tray::handle_system_tray_events)
         .setup(|app| {
