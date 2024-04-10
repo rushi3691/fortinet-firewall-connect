@@ -1,41 +1,53 @@
 # Fortinet-Connect
 
-FortiConnect is an application designed to automate the process of connecting to Fortinet firewalls. It eliminates the need for manual Wi-Fi login and manages session expiration seamlessly.
+FortinetConnect is an application designed to automate the process of connecting to Fortinet firewalls. It eliminates the need for manual Wi-Fi login and manages session expiration seamlessly.
 
 ## Features
 
-- **Automated Connection**: FortiConnect automatically connects to your Fortinet firewall, saving you the hassle of manual login.
+- **Automated Connection**: FortinetConnect automatically connects to your Fortinet firewall, saving you the hassle of manual login.
 - **Session Management**: The app handles session expiration, ensuring you're always connected when you need to be.
-- **<Feature Placeholder 1>**: <Feature Description 1>
-- **<Feature Placeholder 2>**: <Feature Description 2>
+- **Auto Start**: FortinetConnect can be configured to start automatically when your system boots up.
+- **Built in rust**: FortinetConnect is built in Rust, ensuring high performance and low resource usage.
 
 ## Available Builds
 
-FortiConnect is available for the following platforms:
+FortinetConnect is available for the following platforms:
 
-<!-- - **Windows**: [Download Link](#)
-- **macOS**: [Download Link](#)
-- **Linux**: [Download Link](#) -->
+| Platform              | Architecture | Available          | File                                                                                                                                                          |
+|-----------------------|--------------|--------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Linux(ubuntu, debian) | x64          | :white_check_mark: | [fortinet-connect_0.1.1_amd64.deb](https://github.com/rushi3691/fortinet-firewall-connect/releases/download/release/fortinet-connect_0.1.1_amd64.deb)         |
+| macOS(universal)      | arm64, intel | :white_check_mark: | [fortinet-connect_0.1.1_universal.dmg](https://github.com/rushi3691/fortinet-firewall-connect/releases/download/release/fortinet-connect_0.1.1_universal.dmg) |
+| macOS                 | arm64        | :exclamation:      | [fortinet-connect_0.1.1_aarch64.dmg](https://github.com/rushi3691/fortinet-firewall-connect/releases/download/release/fortinet-connect_0.1.1_aarch64.dmg)     |
+| macOS                 | intel        | :grey_exclamation: | [fortinet-connect_0.1.1_x64.dmg](https://github.com/rushi3691/fortinet-firewall-connect/releases/download/release/fortinet-connect_0.1.1_x64.dmg)             |
+| Windows               | x64 (64 bit) | :white_check_mark: | [fortinet-connect_0.1.1_x64-setup.exe](https://github.com/rushi3691/fortinet-firewall-connect/releases/download/release/fortinet-connect_0.1.1_x64-setup.exe) |
+| Windows               | x86 (32 bit) | :grey_exclamation: | [fortinet-connect_0.1.1_x86-setup.exe](https://github.com/rushi3691/fortinet-firewall-connect/releases/download/release/fortinet-connect_0.1.1_x86-setup.exe) |
 
-| Platform | Architecture | Available |
-| -------- | ------------ | --------- |
-| macOS    | arm64        | :heavy_check_mark: |
-| Windows  | x64          | :heavy_check_mark: |
+:white_check_mark: - Available and tested  
+:grey_exclamation: - Available but not tested  
+:exclamation: - Use universal build if this doesn't work
 
-Please replace the '#' in the download links with the actual URL of the builds.
+## Todos
+- [x] Base app with system tray and creds window
+- [x] Add Logging 
+- [x] Support Auto start on boot
+- [x] Ensure Single instance 
+- [ ] Sign the builds
+- [ ] Notifications
+- [ ] StrongHold
 
-## Installation
+
+## Installation(todo)
 
 Detailed installation instructions for each platform can be found in the [Installation Guide](INSTALLATION.md).
 
-## Usage
+## Usage(todo)
 
-Instructions on how to use FortiConnect can be found in the [User Guide](USER_GUIDE.md).
+Instructions on how to use FortinetConnect can be found in the [User Guide](USER_GUIDE.md).
 
-## Contributing
+## Contributing(todo)
 
 We welcome contributions! Please see our [Contributing Guide](CONTRIBUTING.md) for more details.
 
-## License
+## License(todo)
 
-FortiConnect is licensed under the [MIT License](LICENSE).
+FortinetConnect is licensed under the [MIT License](LICENSE).
