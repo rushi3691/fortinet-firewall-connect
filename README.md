@@ -12,15 +12,16 @@ FortinetConnect is an application designed to automate the process of connecting
 ## Available Builds
 
 FortinetConnect is available for the following platforms:
+(All builds are available in the [releases](https://github.com/rushi3691/fortinet-firewall-connect/releases))
 
-| Platform              | Architecture | Available          | File                                                                                                                                                          |
-|-----------------------|--------------|--------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| Linux(ubuntu, debian) | x64          | :white_check_mark: | [fortinet-connect_0.1.1_amd64.deb](https://github.com/rushi3691/fortinet-firewall-connect/releases/download/release/fortinet-connect_0.1.1_amd64.deb)         |
-| macOS(universal)      | arm64, intel | :white_check_mark: | [fortinet-connect_0.1.1_universal.dmg](https://github.com/rushi3691/fortinet-firewall-connect/releases/download/release/fortinet-connect_0.1.1_universal.dmg) |
-| macOS                 | arm64        | :exclamation:      | [fortinet-connect_0.1.1_aarch64.dmg](https://github.com/rushi3691/fortinet-firewall-connect/releases/download/release/fortinet-connect_0.1.1_aarch64.dmg)     |
-| macOS                 | intel        | :grey_exclamation: | [fortinet-connect_0.1.1_x64.dmg](https://github.com/rushi3691/fortinet-firewall-connect/releases/download/release/fortinet-connect_0.1.1_x64.dmg)             |
-| Windows               | x64 (64 bit) | :white_check_mark: | [fortinet-connect_0.1.1_x64-setup.exe](https://github.com/rushi3691/fortinet-firewall-connect/releases/download/release/fortinet-connect_0.1.1_x64-setup.exe) |
-| Windows               | x86 (32 bit) | :grey_exclamation: | [fortinet-connect_0.1.1_x86-setup.exe](https://github.com/rushi3691/fortinet-firewall-connect/releases/download/release/fortinet-connect_0.1.1_x86-setup.exe) |
+| Platform              | Architecture | Available          | File              |
+|-----------------------|--------------|--------------------|-------------------|
+| Linux(ubuntu, debian) | x64          | :white_check_mark: | use amd64.deb     |
+| macOS(universal)      | arm64, intel | :white_check_mark: | use universal.dmg |
+| macOS                 | arm64        | :exclamation:      | use aarch64.dmg   |
+| macOS                 | intel        | :grey_exclamation: | use x64.dmg       |
+| Windows               | x64 (64 bit) | :white_check_mark: | use x64-setup.exe |
+| Windows               | x86 (32 bit) | :grey_exclamation: | use x86-setup.exe |
 
 :white_check_mark: - Available and tested  
 :grey_exclamation: - Available but not tested  
