@@ -38,7 +38,7 @@ fn main() {
         .on_system_tray_event(system_tray::handle_system_tray_events)
         .setup(|app| {
             system_tray::configure_tray_with_autostart(app);
-            setup::verify_creds_on_start(app);
+            setup::verify_creds_on_start_v2(app);
 
             Ok(())
         })

@@ -1,6 +1,7 @@
-use crate::fortinet;
+use crate::{fortinet, Credentials};
 use chrono::Utc;
 use log::{error, info};
+use tauri::Manager as _;
 use tokio::time::{interval, Duration};
 
 // 10800 seconds is actual session timeout
@@ -44,4 +45,20 @@ pub async fn worker(
 
         interval.tick().await;
     }
+}
+
+pub async fn start_and_replace_worker(app_handle: &tauri::AppHandle, username: &String, password: &String) {
+    let state: tauri::State<Credentials> = app_handle.state();
+
+    // stop old worker
+    let old_worker = state.worker.lock().await.take();
+    if let Some(j) = &old_worker {
+        info!("Aborting old worker");
+        j.abort();
+    }
+
+    // start new worker
+    info!("Starting new worker");
+    let j = tauri::async_runtime::spawn(worker(username.to_string(), password.to_string()));
+    state.worker.lock().await.replace(j);
 }

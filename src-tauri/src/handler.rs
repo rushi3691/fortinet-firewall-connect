@@ -1,9 +1,8 @@
 use std::{fs::File, io::Write};
 
-use log::{debug, info, warn};
-use tauri::Manager;
+use log::{debug, warn};
 
-use crate::{fortinet, worker::worker, Credentials};
+use crate::{fortinet, worker::start_and_replace_worker};
 
 #[tauri::command]
 pub async fn store_credentials(
@@ -38,18 +37,19 @@ pub async fn store_credentials(
     file.write_all(s.as_bytes()).unwrap();
 
     // update state
-    let state: tauri::State<Credentials> = app_handle.state();
+    // let state: tauri::State<Credentials> = app_handle.state();
 
-    // stop old worker
-    let old_worker = state.worker.lock().await.take();
-    if let Some(j) = &old_worker {
-        info!("Aborting old worker");
-        j.abort();
-    }
+    // // stop old worker
+    // let old_worker = state.worker.lock().await.take();
+    // if let Some(j) = &old_worker {
+    //     info!("Aborting old worker");
+    //     j.abort();
+    // }
 
-    // start new worker
-    let j = tauri::async_runtime::spawn(worker(username.to_string(), password.to_string()));
-    state.worker.lock().await.replace(j);
+    // // start new worker
+    // let j = tauri::async_runtime::spawn(worker(username.to_string(), password.to_string()));
+    // state.worker.lock().await.replace(j);
+    start_and_replace_worker(&app_handle, &username, &password).await;
 
     let response = format!("Stored credentials for user: {}", username);
     Ok(response)

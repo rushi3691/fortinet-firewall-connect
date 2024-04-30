@@ -2,10 +2,11 @@ use log::info;
 use tauri::{App, AppHandle, CustomMenuItem, SystemTray, SystemTrayEvent, SystemTrayMenu};
 use tauri_plugin_autostart::ManagerExt as _;
 
-use crate::creds_window;
+use crate::{creds_window, worker::start_and_replace_worker};
 
 pub fn generate_tray() -> SystemTray {
     let add = CustomMenuItem::new("add_creds".to_string(), "Add Credentials");
+    let connect = CustomMenuItem::new("connect".to_string(), "Connect Manually");
     let enable_auto_start =
         CustomMenuItem::new("enable_auto_start".to_string(), "Enable Auto Start");
     let disable_auto_start =
@@ -13,6 +14,7 @@ pub fn generate_tray() -> SystemTray {
     let quit = CustomMenuItem::new("quit".to_string(), "Quit");
     let tray_menu = SystemTrayMenu::new()
         .add_item(add)
+        .add_item(connect)
         .add_item(enable_auto_start)
         .add_item(disable_auto_start)
         .add_item(quit);
@@ -26,6 +28,17 @@ pub fn handle_system_tray_events(app_handle: &AppHandle, event: SystemTrayEvent)
             match id.as_str() {
                 "add_creds" => {
                     creds_window::open_window(app_handle);
+                }
+                "connect" => {
+                    info!("manual connect triggered");
+                    if let Some((username, password)) =
+                        creds_window::get_stored_creds_with_app_handle(app_handle)
+                    {
+                        tauri::async_runtime::block_on(start_and_replace_worker(
+                            app_handle, &username, &password,
+                        ));
+                    }
+                    info!("manual connect done");
                 }
                 "enable_auto_start" => {
                     info!("enable_auto_start");
@@ -65,7 +78,6 @@ pub fn handle_system_tray_events(app_handle: &AppHandle, event: SystemTrayEvent)
         _ => {}
     }
 }
-
 
 pub fn configure_tray_with_autostart(app: &mut App) {
     let autostart_manager = app.autolaunch();
