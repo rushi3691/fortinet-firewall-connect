@@ -1,6 +1,6 @@
 [package]
 name = "fortinet-connect"
-version = "0.1.1"
+version = "0.1.2"
 description = "Automatically login to fortinet for wifi access, auto refreshes it so you don't have to do it manually"
 authors = ["Rushikesh Pawar"]
 edition = "2021"
